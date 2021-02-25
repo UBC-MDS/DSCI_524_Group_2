@@ -35,6 +35,10 @@ We welcome and recognize all contributions. You can see a list of current contri
 * Dustin Burnham: @dusty736
 * Kangbo Lu: @KangboLu
 
+### Workflow
+
+For this project we will be using the GitHub Flow strategy for collaboration. 
+
 ### Credits
 
 This package was created with Cookiecutter and the UBC-MDS/cookiecutter-ubc-mds project template, modified from the [pyOpenSci/cookiecutter-pyopensci](https://github.com/pyOpenSci/cookiecutter-pyopensci) project template and the [audreyr/cookiecutter-pypackage](https://github.com/audreyr/cookiecutter-pypackage).
