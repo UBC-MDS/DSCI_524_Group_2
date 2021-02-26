@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import os
 
 
 def filter_pyfect(image, filter_type="blur", filter_size=3, custom_filter=None):
@@ -85,6 +86,38 @@ def get_property(image_path, show_formatted_output=True):
     """
     pass
 
+def compression_pyfect(image_path, output_path, kernel_size=2, pooling_function="max"):
+    """
+    This function uses a lossy pooling algorithm to compress an image.
+    
+    The function can be applied to single channel or 3-channel images. The user provides
+    a path to an image to be compressed and an output path where the image will be saved.
+    The user can also specify the pooling algorithm to be used and the size of the kernel
+    to apply over the image.
+
+    Parameters
+    ----------
+    image_path : str
+        A path to a single local image to be compressed.
+
+    output_path : str
+        A path indicating where the compressed image will be saved.
+
+    kernel_size : int
+        The size of the kernel to be passed over the image. The resulting filter moving
+        across the image will be a 2D array with dimensions kernel_size x kernel_size.
+        Default: 2
+               
+    pooling_function : str
+        The pooling algorithm to be used within a kernel. There are three options: "max", "min", and "mean".
+        Default: "max"
+
+    Examples
+    --------
+    >>> compression_pyfect("./example_image.jpg", "./compressed_image.jpg", kernel_size=3, pooling_function="max")
+           
+    """
+    pass
 
 def rotate_pyfect(image, theta=90):
     """
