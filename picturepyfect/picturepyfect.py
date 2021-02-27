@@ -51,14 +51,14 @@ def filter_pyfect(image, filter_type="blur", filter_size=3, custom_filter=None):
     pass
 
 
-def get_property(image_path, show_formatted_output=True):
+def get_property(image, show_formatted_output=True):
     """
     Extract image properties and show visualizations for channel histograms.
     The output properties includes mean and mean of each channel along with the file dimension and total pixels.
     Parameters
     ----------
-    image_path : str
-        a path to one local image for extract image info and output image property
+    image : numpy.ndarray
+        A n*n or n*n*3 numpy array to representing single channel or 3-channel image
     show_formatted_output : bool
         a boolean variable to control whether to show the formatted output
     Returns:
@@ -68,7 +68,7 @@ def get_property(image_path, show_formatted_output=True):
         and 3 channels' mean and median values separated by channel.
     Examples
     ---------
-    >>> get_property("./example_image.jpg", show_formatted_output=True)
+    >>> get_property(image, show_formatted_output=True)
     {dimension: [1280, 720], total_pixels: 921600,
     r_channel: [80, 90], g_channel: [120, 90], b_channel: [155, 160]}
 
