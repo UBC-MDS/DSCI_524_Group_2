@@ -91,22 +91,19 @@ def get_property(image, show_formatted_output=True):
     """
     pass
 
-def compression_pyfect(image_path, output_path, kernel_size=2, pooling_function="max"):
+def compression_pyfect(image, kernel_size=2, pooling_function="max"):
     """
     This function uses a lossy pooling algorithm to compress an image.
     
-    The function can be applied to single channel or 3-channel images. The user provides
-    a path to an image to be compressed and an output path where the image will be saved.
+    The function can be applied to single channel or 3-channel images. The user passes
+    an image which is to be compressed and the resulting compressed numpy array is returned.
     The user can also specify the pooling algorithm to be used and the size of the kernel
     to apply over the image.
 
     Parameters
     ----------
-    image_path : str
-        A path to a single local image to be compressed.
-
-    output_path : str
-        A path indicating where the compressed image will be saved.
+    image : numpy.ndarray
+        A n*n or n*n*3 numpy array representing a single channel or 3-channel image.
 
     kernel_size : int
         The size of the kernel to be passed over the image. The resulting filter moving
@@ -117,10 +114,18 @@ def compression_pyfect(image_path, output_path, kernel_size=2, pooling_function=
         The pooling algorithm to be used within a kernel. There are three options: "max", "min", and "mean".
         Default: "max"
 
+    Returns:
+    ---------
+    numpy.ndarray
+        A numpy array representing the compressed image.
+
     Examples
     --------
-    >>> compression_pyfect("./example_image.jpg", "./compressed_image.jpg", kernel_size=3, pooling_function="max")
-           
+    >>> compression_pyfect(image, kernel_size=3, pooling_function="max")
+    array([[0.04737957, 0.04648845, 0.04256656, 0.04519495],
+       [0.04657273, 0.04489012, 0.04031093, 0.04047667],
+       [0.04641026, 0.04106843, 0.04560866, 0.04732271],
+       [0.0511907 , 0.04518351, 0.04946411, 0.04030291]])       
     """
     pass
 
