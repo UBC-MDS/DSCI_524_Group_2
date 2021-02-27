@@ -12,7 +12,7 @@ $ pip install -i https://test.pypi.org/simple/ picturepyfect
 
 ## Features
 
-The package picturepyfect is an image untility package intended to manipulate images through a variety of functions. The intention is that a user with little to no experience, can quickly call a function to alter, compress, or print out statistics for an image they have saved on their local device. Internally, the functions make use of numpy arrays for quick and efficient processes.
+The package picturepyfect is an image untility package intended to manipulate images through a variety of functions. The intention is that a user with little to no experience, can quickly call a function to alter, compress, or print out statistics for an image. Internally, the functions make use of numpy arrays for quick and efficient processes.
 
 There are four main functions planned for development and they are outlined below. Each function can be called on colour images or greyscale images. Additional functions may be added if time permits.
 
@@ -24,7 +24,7 @@ There are four main functions planned for development and they are outlined belo
 
 - Function 4 rotate_pyfect: This final function applies a rotation to a given image and outputs the result. A user can specifiy the number of degrees they wish the image to be rotated.
 
-Image processing is very popular in the Python ecosystem so we are aware that we are not reinventing the wheel with our package, but hope to gain a deeper understanding of the inner workings of an image package. Specifically, both NumPy and OpenCV have functions that rotate or flip an image (cv2.rotate(), cv2.flip(), np.rot90(), etc). PyTorch has many functions related to convolutional neural networks that both apply max pooling and filters to images which is what we are partially aiming to create with functions 1 and 3. Lastly, the ImageStat module from the Python Imaging Library (PIL) accomplishes many of the tasks outlined in function 
+Image processing is very popular in the Python ecosystem so we are aware that we are not reinventing the wheel with our package, but we hope to gain a deeper understanding of the inner workings of an image package. Specifically, both NumPy and OpenCV have functions that rotate or flip an image (cv2.rotate(), cv2.flip(), np.rot90(), etc). PyTorch has many functions related to convolutional neural networks that both apply pooling layers and filter layers to images which is what we are partially aiming to create with functions 1 and 3. Lastly, the ImageStat module from the Python Imaging Library (PIL) accomplishes many of the tasks outlined in function 2.
 
 ## Dependencies
 
