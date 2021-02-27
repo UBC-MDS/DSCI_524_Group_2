@@ -31,6 +31,11 @@ def filter_pyfect(image, filter_type="blur", filter_size=3, custom_filter=None):
     custom_filter : numpy.ndarray
         A k*k or k*k*3 numpy array allows users to pass their own filter. This is only
         used if the users select filter_type = "custom"
+    
+    Returns:
+    ---------
+    image_property: numpy.ndarray
+        A numpy array representing the transformed image.
 
     Examples
     --------
