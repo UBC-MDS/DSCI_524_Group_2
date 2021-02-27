@@ -2,7 +2,7 @@
 
 ![](https://github.com/debanandasarkar/picturepyfect/workflows/build/badge.svg) [![codecov](https://codecov.io/gh/debanandasarkar/picturepyfect/branch/main/graph/badge.svg)](https://codecov.io/gh/debanandasarkar/picturepyfect) ![Release](https://github.com/debanandasarkar/picturepyfect/workflows/Release/badge.svg) [![Documentation Status](https://readthedocs.org/projects/picturepyfect/badge/?version=latest)](https://picturepyfect.readthedocs.io/en/latest/?badge=latest)
 
-A fun utility package to process and save images.
+A fun Python utility package to make your pictures perfect! The package enables users to process, manipulate, and gather data about their images.
 
 ## Installation
 
@@ -12,7 +12,7 @@ $ pip install -i https://test.pypi.org/simple/ picturepyfect
 
 ## Features
 
-The package picturepyfect is an image untility package intended to manipulate images through a variety of functions. The intention is that a user with little to no experience, can quickly call a function to alter, compress, or print out statistics for an image. Internally, the functions make use of numpy arrays for quick and efficient processes.
+The package picturepyfect is an image untility package intended to manipulate images through a variety of functions. The intention is that a user with little to no experience can quickly call a function to alter, compress, or print out statistics for an image. Internally, the functions make use of numpy arrays for quick and efficient processes.
 
 There are four main functions planned for development and they are outlined below. Each function can be called on colour images or greyscale images. Additional functions may be added if time permits.
 
