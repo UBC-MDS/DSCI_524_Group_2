@@ -2,7 +2,7 @@
 
 ![](https://github.com/debanandasarkar/picturepyfect/workflows/build/badge.svg) [![codecov](https://codecov.io/gh/debanandasarkar/picturepyfect/branch/main/graph/badge.svg)](https://codecov.io/gh/debanandasarkar/picturepyfect) ![Release](https://github.com/debanandasarkar/picturepyfect/workflows/Release/badge.svg) [![Documentation Status](https://readthedocs.org/projects/picturepyfect/badge/?version=latest)](https://picturepyfect.readthedocs.io/en/latest/?badge=latest)
 
-A fun utility to process image
+A fun utility package to process and save images.
 
 ## Installation
 
@@ -12,7 +12,19 @@ $ pip install -i https://test.pypi.org/simple/ picturepyfect
 
 ## Features
 
-- TODO
+The package picturepyfect is an image untility package intended to manipulate images through a variety of functions. The intention is that a user with little to no experience, can quickly call a function to alter, compress, or print out statistics for an image they have saved on their local device. Internally, the functions make use of numpy arrays for quick and efficient processes.
+
+There are four main functions planned for development and they are outlined below. Each function can be called on colour images or greyscale images. Additional functions may be added if time permits.
+
+- Function 1 filter_pyfect: With this function, a user can either select a predefined filter or create their own custom filter. The image is then passed through the filter and output for the user to view.
+
+- Function 2 get_property: The goal of this function is to take an image and return statistics related to the different colour bands within the image. These statistics include mean and median values for each channel as well as a plotted histogram of values for each channel.
+
+- Function 3 compression_pyfect: Using a pooling algorithm, this function will apply lossy compression to given image. The user will be able to specify the type of pooling (max, min, or mean) as well as the kernel size.
+
+- Function 4 rotate_pyfect: This final function applies a rotation to a given image and outputs the result. A user can specifiy the number of degrees they wish the image to be rotated.
+
+Image processing is very popular in the Python ecosystem so we are aware that we are not reinventing the wheel with our package, but hope to gain a deeper understanding of the inner workings of an image package. Specifically, both NumPy and OpenCV have functions that rotate or flip an image (cv2.rotate(), cv2.flip(), np.rot90(), etc). PyTorch has many functions related to convolutional neural networks that both apply max pooling and filters to images which is what we are partially aiming to create with functions 1 and 3. Lastly, the ImageStat module from the Python Imaging Library (PIL) accomplishes many of the tasks outlined in function 
 
 ## Dependencies
 
