@@ -1,5 +1,6 @@
 from picturepyfect.get_property import get_property
 import matplotlib.pyplot as plt
+import numpy as np
 import pytest
 
 # read test images and get test image properties
@@ -19,16 +20,32 @@ def test_image_dimensions():
 
 # test get_property returned total pixels
 def test_total_pixels():
-    pass
+    assert pure_red["total_pixels"] == 30000
+    assert pure_green["total_pixels"] == 30000
+    assert pure_blue["total_pixels"] == 30000
+    assert pure_white["total_pixels"] == 30000
+    assert pure_black["total_pixels"] == 30000
 
 # test get_property returned r channel values
 def test_r_channel():
-    pass
+    assert pure_red["r_channel"] == [1.0, 1.0]
+    assert pure_green["r_channel"] == [0.0, 0.0]
+    assert pure_blue["r_channel"] == [0.0, 0.0]
+    assert pure_white["r_channel"] == [1.0, 1.0]
+    assert pure_black["r_channel"] == [0.0, 0.0]
 
 # test get_property returned g channel values
 def test_g_channel():
-    pass
+    assert pure_red["g_channel"] == [0.0, 0.0]
+    assert pure_green["g_channel"] == [1.0, 1.0]
+    assert pure_blue["g_channel"] == [0.0, 0.0]
+    assert pure_white["g_channel"] == [1.0, 1.0]
+    assert pure_black["g_channel"] == [0.0, 0.0]
 
 # test get_property returned b channel values
 def test_b_channel():
-    pass
+    assert pure_red["b_channel"] == [0.0, 0.0]
+    assert pure_green["b_channel"] == [0.0, 0.0]
+    assert pure_blue["b_channel"] == [1.0, 1.0]
+    assert pure_white["b_channel"] == [1.0, 1.0]
+    assert pure_black["b_channel"] == [0.0, 0.0]

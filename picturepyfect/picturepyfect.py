@@ -52,8 +52,8 @@ def filter_pyfect(image, filter_type="blur", filter_size=3, custom_filter=None):
 
 def get_property(image):
     """
-    Extract image properties and show visualizations for channel histograms.
-    The output properties includes mean and mean of each channel along with the file dimension and total pixels.
+    Extract image properties. The output properties includes mean and mean of each channel 
+    along with the file dimension and total pixels.
     Parameters
     ----------
     image : numpy.ndarray
@@ -79,20 +79,6 @@ def get_property(image):
                         "r_channel": [channel_means[0], channel_medians[0]], 
                         "g_channel": [channel_means[1], channel_medians[1]], 
                         "b_channel": [channel_means[2], channel_medians[2]]}
-
-    # histogram for the RGB channels
-    channel_names = ["Red", "Green", "Blue"]
-    plt.figure(figsize=(15,8))
-    for i in range(0, 3):
-        plt.subplot(1, 3, i+1)
-        plt.hist(image[:,:,i].flatten(), 
-                color=channel_names[i])  # density=False would make counts
-        if i == 0:
-            plt.ylabel('Frequency')
-        plt.xlabel(channel_names[i] + " Channel")
-        plt.title(channel_names[i] + " Channel Histogram")
-    plt.suptitle("RGB Channel Histogram")
-    plt.show()
 
     # return the dictionary of image property
     return image_properties
