@@ -50,8 +50,7 @@ def filter_pyfect(image, filter_type="blur", filter_size=3, custom_filter=None):
     """
     pass
 
-
-def get_property(image, show_formatted_output=True):
+def get_property(image):
     """
     Extract image properties and show visualizations for channel histograms.
     The output properties includes mean and mean of each channel along with the file dimension and total pixels.
@@ -59,8 +58,6 @@ def get_property(image, show_formatted_output=True):
     ----------
     image : numpy.ndarray
         A n*n or n*n*3 numpy array to representing single channel or 3-channel image
-    show_formatted_output : bool
-        a boolean variable to control whether to show the formatted output
     Returns:
     ---------
     image_property: dictionary
@@ -68,29 +65,37 @@ def get_property(image, show_formatted_output=True):
         and 3 channels' mean and median values separated by channel.
     Examples
     ---------
-    >>> get_property(image, show_formatted_output=True)
+    >>> get_property(image)
     {dimension: [1280, 720], total_pixels: 921600,
     r_channel: [80, 90], g_channel: [120, 90], b_channel: [155, 160]}
-
-    ===============================
-    SHOW FORMATTED IMAGE PROPERTIES
-    ===============================
-    Image dimension: 1280 x 720
-    Total pixels: 921600 pixels
-    R Channel:
-        Mean: 80
-        Median: 90
-    G Channel:
-        Mean: 120
-        Median: 90
-    B Channel:
-        Mean: 155
-        Median: 160
-
-    Show Histograms for Each Channel:
     """
-    pass
+    # obtain image properties
+    dimension = [image.shape[0], image.shape[1]]
+    total_pixels = dimension[0] * dimension[1]
+    channel_means = [image[:,:,i].flatten().mean() for i in range(0, 3)]
+    channel_medians = [np.median(image[:,:,i].flatten()) for i in range(0, 3)]
+    image_properties = {"dimension": dimension, 
+                        "total_pixels": total_pixels,
+                        "r_channel": [channel_means[0], channel_medians[0]], 
+                        "g_channel": [channel_means[1], channel_medians[1]], 
+                        "b_channel": [channel_means[2], channel_medians[2]]}
 
+    # histogram for the RGB channels
+    channel_names = ["Red", "Green", "Blue"]
+    plt.figure(figsize=(15,8))
+    for i in range(0, 3):
+        plt.subplot(1, 3, i+1)
+        plt.hist(image[:,:,i].flatten(), 
+                color=channel_names[i])  # density=False would make counts
+        if i == 0:
+            plt.ylabel('Frequency')
+        plt.xlabel(channel_names[i] + " Channel")
+        plt.title(channel_names[i] + " Channel Histogram")
+    plt.suptitle("RGB Channel Histogram")
+    plt.show()
+
+    # return the dictionary of image property
+    return image_properties
 
 def compression_pyfect(image, kernel_size=2, pooling_function="max"):
     """
