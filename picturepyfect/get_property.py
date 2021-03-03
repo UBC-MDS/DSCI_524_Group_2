@@ -13,7 +13,7 @@ def get_property(image):
     ---------
     image_property: dictionary
         a dictionary of image properties for dimension of width and height, total pixels,
-        and 3 channels' mean and median values separated by channel.
+        and each channel's mean and median value stored as a list for each channel.
     Examples
     ---------
     >>> get_property(image)
