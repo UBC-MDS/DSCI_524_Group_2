@@ -9,6 +9,30 @@ pure_green = get_property(plt.imread("./img/green.png"))
 pure_blue = get_property(plt.imread("./img/blue.png"))
 pure_white = get_property(plt.imread("./img/white.png"))
 pure_black = get_property(plt.imread("./img/black.png"))
+pure_black = get_property(plt.imread("./img/black.png"))
+wrong_dim1 = np.zeros([1,1])
+wrong_dim2 = np.zeros([1,1,1])
+wrong_dim3 = np.zeros([1,1,2])
+wrong_dim4 = np.zeros([1,1,5])
+
+# test error handling
+def test_error():
+    with pytest.raises(TypeError):
+        get_property(None)
+    with pytest.raises(TypeError):
+        get_property(1)
+    with pytest.raises(TypeError):
+        get_property([1])
+    with pytest.raises(TypeError):
+        get_property("string")
+    with pytest.raises(TypeError):
+        get_property(wrong_dim1)
+    with pytest.raises(TypeError):
+        get_property(wrong_dim2)
+    with pytest.raises(TypeError):
+        get_property(wrong_dim3)
+    with pytest.raises(TypeError):
+        get_property(wrong_dim4)
 
 # test get_property returned dimensions
 def test_image_dimensions():
