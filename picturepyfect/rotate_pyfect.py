@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def rotate_pyfect(image, theta=90):
+def rotate_pyfect(image, n_rot=90):
     """
     This function can be used to apply a rotational transformation on an image.
 
@@ -14,8 +14,8 @@ def rotate_pyfect(image, theta=90):
     image : numpy.ndarray
         A n*n or n*n*3 numpy array representing an 3-channel image
 
-    theta : int
-        The degrees to rotate an image.  Default of 90 degrees.
+    n_rot : int
+        The number of 90 degree rotations to implement
 
     Returns:
     ---------
@@ -30,4 +30,25 @@ def rotate_pyfect(image, theta=90):
     array([[ 0.73336936, -0.60597828],
        [ 0.31267308, -0.13894716]])
     """
-    pass
+
+    # Initialize dictionary with each channel being mapped to  it's channel number
+    channel_dict = {
+        channel: image[channel, :, :] for channel in range(0, image.shape[0])
+    }
+
+    # While rotations to do
+    while n_rot > 0:
+        # For each channel
+        for channel in range(0, image.shape[0]):
+            # Pull matrix to rotate
+            rot_mat = channel_dict[channel]
+            # rotate the matrix
+            channel_dict[channel] = np.array([list(x)[::-1] for x in zip(*rot_mat)])
+
+        # Update number of rotations left
+        n_rot = n_rot - 1
+
+    # Stack rotated matrices to create rotated image
+    new_img = np.stack(list(channel_dict.values()))
+
+    return new_img
