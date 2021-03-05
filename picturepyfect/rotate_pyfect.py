@@ -31,6 +31,10 @@ def rotate_pyfect(image, n_rot=90):
        [ 0.31267308, -0.13894716]])
     """
 
+    # error handling for invalid type
+    if type(image) != np.ndarray:
+        raise TypeError("Invalid Type: Image must be a numpy array")
+
     # Initialize dictionary with each channel being mapped to  it's channel number
     channel_dict = {
         channel: image[channel, :, :] for channel in range(0, image.shape[0])
@@ -43,7 +47,7 @@ def rotate_pyfect(image, n_rot=90):
             # Pull matrix to rotate
             rot_mat = channel_dict[channel]
             # rotate the matrix
-            channel_dict[channel] = np.array([list(x)[::-1] for x in zip(*rot_mat)])
+            channel_dict[channel] = np.array([row[::-1] for row in zip(*rot_mat)])
 
         # Update number of rotations left
         n_rot = n_rot - 1
