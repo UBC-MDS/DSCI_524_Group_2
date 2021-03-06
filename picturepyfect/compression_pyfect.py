@@ -127,13 +127,15 @@ def pool_band(band, kernel_size, pool_func):
     pool_colour_band = pool_colour_band.reshape(-1, col)
 
     # rotate and pool along the rows again
-    pool_colour_band = np.rot90(pool_colour_band)
+    # old pool_colour_band = np.rot90(pool_colour_band)
+    pool_colour_band = rotate_pyfect(pool_colour_band, n_rot=3)
     pool_colour_band = pool_colour_band.reshape(-1, kernel_size)
     pool_colour_band = pool_func(pool_colour_band, axis=1)
     pool_colour_band = pool_colour_band.reshape(col, -1)
 
     # rotate back to proper layout
-    pool_colour_band = np.rot90(pool_colour_band, 3)
+    # old pool_colour_band = np.rot90(pool_colour_band, 3)
+    pool_colour_band = rotate_pyfect(pool_colour_band, n_rot=1)
     return pool_colour_band
 
 def check_values(image, kernel_size):
