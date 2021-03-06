@@ -117,7 +117,7 @@ def test_image_content():
     )
 
 
-# test that we don't the rows match the columns after rotation
+# test that the rows match the columns after rotation
 def test_rows_cols():
     assert (test_image[0, 0, :] == test_image_1[0, :, -1]).all()
     assert (test_image[0, 0, :] == test_image_2[0, -1, :][::-1]).all()
