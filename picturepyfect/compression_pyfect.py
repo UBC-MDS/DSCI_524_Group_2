@@ -1,7 +1,10 @@
 import numpy as np
+from picturepyfect.rotate_pyfect import rotate_pyfect
+
 
 class DimensionError(Exception):
     """ Raised when when a numpy array has the wrong shape. """
+
 
 def compression_pyfect(image, kernel_size=2, pooling_function="max"):
     """
@@ -39,10 +42,10 @@ def compression_pyfect(image, kernel_size=2, pooling_function="max"):
        [0.04641026, 0.04106843, 0.04560866, 0.04732271],
        [0.0511907 , 0.04518351, 0.04946411, 0.04030291]])
     """
-    
+
     # Check if the image and kernel_size are valid inputs
     check_values(image, kernel_size)
-    
+
     # Check for a valid pooling_function input
     if pooling_function == "max":
         pool_func = np.max
@@ -54,7 +57,7 @@ def compression_pyfect(image, kernel_size=2, pooling_function="max"):
         raise ValueError(
             "The pooling_function argument only takes a value of 'max', 'min', or 'mean'."
         )
-    
+
     # If image is not divisible by the kernel_size
     # crop off the right side columns and the bottom rows
     divisible_row = image.shape[0] // kernel_size * kernel_size
@@ -65,19 +68,20 @@ def compression_pyfect(image, kernel_size=2, pooling_function="max"):
         image = image[:divisible_row, :divisible_col]
         b1 = pool_band(image, kernel_size, pool_func)
         return b1
-    
+
     # If image is colour, compress all 3 colour bands
     else:
         image = image[:divisible_row, :divisible_col, :]
-        
+
         # Pool the 3 colour bands
-        b1 = pool_band(image[:,:,0], kernel_size, pool_func)
-        b2 = pool_band(image[:,:,1], kernel_size, pool_func)
-        b3 = pool_band(image[:,:,2], kernel_size, pool_func)
+        b1 = pool_band(image[:, :, 0], kernel_size, pool_func)
+        b2 = pool_band(image[:, :, 1], kernel_size, pool_func)
+        b3 = pool_band(image[:, :, 2], kernel_size, pool_func)
 
         # Combine the 3 colour bands
-        return np.dstack((b1,b2,b3))
-    
+        return np.dstack((b1, b2, b3))
+
+
 def pool_band(band, kernel_size, pool_func):
     """
     This function is to be used in conjunction with compression_pyfect and compresses
@@ -111,12 +115,12 @@ def pool_band(band, kernel_size, pool_func):
        [0.04641026, 0.04106843, 0.04560866, 0.04732271],
        [0.0511907 , 0.04518351, 0.04946411, 0.04030291]])
     """
-    
+
     # Using this forum post as a guide and reference for the below code
     # https://stackoverflow.com/questions/42463172/how-to-perform-max-mean-pooling-on-a-2d-array-using-numpy/42463514#42463514
-    
-    row = band.shape[0]//kernel_size
-    col = band.shape[1]//kernel_size
+
+    row = band.shape[0] // kernel_size
+    col = band.shape[1] // kernel_size
 
     # The colour band to pool
     pool_colour_band = band
@@ -138,6 +142,7 @@ def pool_band(band, kernel_size, pool_func):
     pool_colour_band = rotate_pyfect(pool_colour_band, n_rot=1)
     return pool_colour_band
 
+
 def check_values(image, kernel_size):
     """
     This function checks that the image and kernel size are valid inputs
@@ -157,36 +162,30 @@ def check_values(image, kernel_size):
     >>> check_values(image, kernel_size=3)
     """
 
-    if(not isinstance(image, np.ndarray)):
-        raise ValueError(
-            "Image must be a numpy array."
-        )
-    
-    if(not isinstance(kernel_size, int)):
-        raise ValueError(
-            "kernel_size must be a positive integer greater than 0."
-        )
-        
-    if(kernel_size < 1):
-        raise ValueError(
-            "kernel_size must be a positive integer greater than 0."
-        )
-    
+    if not isinstance(image, np.ndarray):
+        raise ValueError("Image must be a numpy array.")
+
+    if not isinstance(kernel_size, int):
+        raise ValueError("kernel_size must be a positive integer greater than 0.")
+
+    if kernel_size < 1:
+        raise ValueError("kernel_size must be a positive integer greater than 0.")
+
     # Check if the image is of the correct shape. Greyscale and colour images both accepted
-    if (len(image.shape) != 2 and len(image.shape) != 3):
+    if len(image.shape) != 2 and len(image.shape) != 3:
         raise DimensionError(
             "The input image array needs to be of shape n x n, or n x n x 3."
         )
-    
+
     # If the image is of size n x n x n, ensure that the third dimension equals 3.
-    if(len(image.shape) == 3):
-        if(image.shape[2] != 3):
+    if len(image.shape) == 3:
+        if image.shape[2] != 3:
             raise DimensionError(
                 "The input image array needs to be of shape n x n, or n x n x 3."
             )
-    
+
     # Check that the kernel_size is smaller than the image height and width
-    if(image.shape[0] < kernel_size or image.shape[1] < kernel_size):
+    if image.shape[0] < kernel_size or image.shape[1] < kernel_size:
         raise ValueError(
             "The kernel size must not be larger than the height or width of the input image array."
         )
