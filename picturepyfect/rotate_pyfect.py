@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def rotate_pyfect(image, n_rot=90):
+def rotate_pyfect(image, n_rot=1):
     """
     This function can be used to apply a rotational transformation on an image.
 
