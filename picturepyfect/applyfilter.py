@@ -222,7 +222,7 @@ def filter_pyfect(image, filter_type="blur", filter_size=3, custom_filter=None):
 
     Returns:
     ---------
-    image_property: numpy.ndarray
+    filtered_image: numpy.ndarray
         A numpy array representing the transformed image.
 
     Examples
