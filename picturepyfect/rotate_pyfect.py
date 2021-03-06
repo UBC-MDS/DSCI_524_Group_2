@@ -47,27 +47,36 @@ def rotate_pyfect(image, n_rot=1):
         raise TypeError("Invalid Type: n_rot must be between 1 and 4")
 
     # error handling for invalid dimensions
-    if len(image.shape) != 3:
-        raise TypeError("Invalid Type: Image must by 3 dimensional")
+    if len(image.shape) not in set([2, 3]):
+        raise TypeError("Invalid Type: Image must by 2 or 3 dimensional")
 
-    # Initialize dictionary with each channel being mapped to  it's channel number
-    channel_dict = {
-        channel: image[:, :, channel] for channel in range(0, image.shape[2])
-    }
+    if len(image.shape) == 3:
+        # Initialize dictionary with each channel being mapped to  it's channel number
+        channel_dict = {
+            channel: image[:, :, channel] for channel in range(0, image.shape[2])
+        }
 
-    # While rotations to do
-    while n_rot > 0:
-        # For each channel
-        for channel in range(0, image.shape[2]):
-            # Pull matrix to rotate
-            rot_mat = channel_dict[channel]
-            # rotate the matrix
-            channel_dict[channel] = np.array([row[::-1] for row in zip(*rot_mat)])
+        # While rotations to do
+        while n_rot > 0:
+            # For each channel
+            for channel in range(0, image.shape[2]):
+                # Pull matrix to rotate
+                rot_mat = channel_dict[channel]
+                # rotate the matrix
+                channel_dict[channel] = np.array([row[::-1] for row in zip(*rot_mat)])
 
-        # Update number of rotations left
-        n_rot = n_rot - 1
+            # Update number of rotations left
+            n_rot = n_rot - 1
 
-    # Stack rotated matrices to create rotated image
-    new_img = np.dstack(list(channel_dict.values()))
+        # Stack rotated matrices to create rotated image
+        new_img = np.dstack(list(channel_dict.values()))
+    else:
+        while n_rot > 0:
+            image = np.array([row[::-1] for row in zip(*image)])
+
+            # Update number of rotations left
+            n_rot = n_rot - 1
+
+        new_img = image
 
     return new_img
