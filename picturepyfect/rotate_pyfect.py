@@ -71,6 +71,12 @@ def rotate_pyfect(image, n_rot=1):
         # Stack rotated matrices to create rotated image
         new_img = np.dstack(list(channel_dict.values()))
     else:
-        new_img = np.array([row[::-1] for row in zip(*image)])
+        while n_rot > 0:
+            image = np.array([row[::-1] for row in zip(*image)])
+
+            # Update number of rotations left
+            n_rot = n_rot - 1
+
+        new_img = image
 
     return new_img
