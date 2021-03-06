@@ -1,4 +1,5 @@
 from picturepyfect.compression_pyfect import compression_pyfect
+from picturepyfect.compression_pyfect import DimensionError
 import pytest
 import numpy as np
 
