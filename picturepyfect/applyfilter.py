@@ -1,22 +1,29 @@
 import numpy as np
 
+
 class FilterTypeException(Exception):
-    '''
+    """
     Creates custom exception for File Type
-    '''
+    """
+
     pass
+
 
 class ImageDimensionException(Exception):
-    '''
+    """
     Creates custom exception for Image Dimension
-    '''
+    """
+
     pass
 
+
 class FilterDimensionException(Exception):
-    '''
+    """
     Creates custom exception for Filter Dimension
-    '''
+    """
+
     pass
+
 
 def filter_pyfect_2D(image, kernel):
     """
@@ -29,17 +36,17 @@ def filter_pyfect_2D(image, kernel):
 
     kernel : numpy.ndarray
         A 2D numpy array representing a convolution filter
-        
+
     Returns:
     ---------
     filtered_image: numpy.ndarray
-        Result of the filtering as a 2D numpy array. Please note that the 
+        Result of the filtering as a 2D numpy array. Please note that the
         values are scaled so that they are between range of 0 and 1 using minmax scaler
         for plotting stability
 
     Examples
     --------
-    >>> image = np.arange(1, 26).reshape(5, 5)       
+    >>> image = np.arange(1, 26).reshape(5, 5)
     >>> kernel = np.ones((2,2))
     >>> filter_pyfect_2D(image, kernel)
     array([[0.        , 0.05555556, 0.11111111, 0.16666667],
@@ -55,8 +62,16 @@ def filter_pyfect_2D(image, kernel):
     expanded_input = np.lib.stride_tricks.as_strided(
         image,
         shape=(
-            int((image.shape[0] - kernel.shape[0] + (2 * padding_size)) / stride_size) + 1,
-            int((image.shape[1] - kernel.shape[1] + (2 * padding_size)) / stride_size) + 1,
+            int(
+                (image.shape[0] - kernel.shape[0] + (2 * padding_size))
+                / stride_size
+            )
+            + 1,
+            int(
+                (image.shape[1] - kernel.shape[1] + (2 * padding_size))
+                / stride_size
+            )
+            + 1,
             kernel.shape[0],
             kernel.shape[1],
         ),
@@ -76,10 +91,11 @@ def filter_pyfect_2D(image, kernel):
         )
     return filtered_image
 
+
 def filter_pyfect_3D(image, kernel):
     """
     Performs convolution type filtering using 3D kernel on a 3D numpy array.
-    
+
     Both the kernel and image should have 3 channels in the 3rd dimension.
 
     Parameters
@@ -89,11 +105,11 @@ def filter_pyfect_3D(image, kernel):
 
     kernel : numpy.ndarray
         A 3D numpy array representing a 3D convolution filter with 3 channels
-        
+
     Returns:
     ---------
     filtered_image: numpy.ndarray
-        Result of the filtering as a 3D numpy array. Please note that the 
+        Result of the filtering as a 3D numpy array. Please note that the
         values are scaled so that they are between range of 0 and 1 using minmax scaler
         within each channel for plotting stability
 
@@ -107,13 +123,13 @@ def filter_pyfect_3D(image, kernel):
        [0.27777778, 0.33333333, 0.38888889, 0.44444444],
        [0.55555556, 0.61111111, 0.66666667, 0.72222222],
        [0.83333333, 0.88888889, 0.94444444, 1.        ]])
-       
+
     >>> result[:,:,1]
     array([[0.        , 0.05555556, 0.11111111, 0.16666667],
        [0.27777778, 0.33333333, 0.38888889, 0.44444444],
        [0.55555556, 0.61111111, 0.66666667, 0.72222222],
        [0.83333333, 0.88888889, 0.94444444, 1.        ]])
-       
+
     >>> result[:,:,2]
     array([[0.        , 0.05555556, 0.11111111, 0.16666667],
        [0.27777778, 0.33333333, 0.38888889, 0.44444444],
@@ -121,19 +137,33 @@ def filter_pyfect_3D(image, kernel):
        [0.83333333, 0.88888889, 0.94444444, 1.        ]])
 
     """
-    
+
     padding_size = 0  # for future enhancement
     stride_size = 1  # for future enhancement
-    
-    filtered_image = np.zeros((int((image.shape[0] - kernel.shape[0] + (2 * padding_size)) / stride_size) + 1, 
-                               int((image.shape[1] - kernel.shape[1] + (2 * padding_size)) / stride_size) + 1, 3))
-    
+
+    filtered_image = np.zeros(
+        (
+            int(
+                (image.shape[0] - kernel.shape[0] + (2 * padding_size))
+                / stride_size
+            )
+            + 1,
+            int(
+                (image.shape[1] - kernel.shape[1] + (2 * padding_size))
+                / stride_size
+            )
+            + 1,
+            3,
+        )
+    )
+
     for k in range(3):
-        temp_image = image[:,:,k]
-        temp_kernel = kernel[:,:,k]
+        temp_image = image[:, :, k]
+        temp_kernel = kernel[:, :, k]
         filtered_image[:, :, k] = filter_pyfect_2D(temp_image, temp_kernel)
-        
+
     return filtered_image
+
 
 def build_filter(kernel_type, kernel_size):
     """
@@ -149,7 +179,7 @@ def build_filter(kernel_type, kernel_size):
 
     filter_size : int
         An integer determining the filter size.
-        
+
     Returns:
     ---------
     image_property: numpy.ndarray
@@ -161,7 +191,7 @@ def build_filter(kernel_type, kernel_size):
     array([[0.01, 0.01, 0.01],
        [0.01, 0.01, 0.01],
        [0.01, 0.01, 0.01]])
-       
+
     >>> build_filter("sharpen", 7)
     array([[ 0,  0,  0, -1,  0,  0,  0],
        [ 0,  0, -1, -1, -1,  0,  0],
@@ -174,24 +204,32 @@ def build_filter(kernel_type, kernel_size):
     """
     if kernel_type == "blur":
         kernel = np.full((kernel_size, kernel_size), 0.01)
-        
+
     elif kernel_type == "sharpen":
         kernel = np.full((kernel_size, kernel_size), -1)
-        kernel[int(kernel_size/2), int(kernel_size/2)] = 5
-        for i in range(int(kernel_size/2)):
-            kernel[i, np.arange(int(kernel_size/2) - i)] = 0
-            kernel[i, np.arange(int(kernel_size/2) + 1 + i, int(kernel_size))] = 0
-            kernel[int(kernel_size) - i - 1, np.arange(int(kernel_size/2) - i)] = 0
-            kernel[int(kernel_size) - i - 1, np.arange(int(kernel_size/2) + 1 + i, int(kernel_size))] = 0
-        
+        kernel[int(kernel_size / 2), int(kernel_size / 2)] = 5
+        for i in range(int(kernel_size / 2)):
+            kernel[i, np.arange(int(kernel_size / 2) - i)] = 0
+            kernel[
+                i, np.arange(int(kernel_size / 2) + 1 + i, int(kernel_size))
+            ] = 0
+            kernel[
+                int(kernel_size) - i - 1, np.arange(int(kernel_size / 2) - i)
+            ] = 0
+            kernel[
+                int(kernel_size) - i - 1,
+                np.arange(int(kernel_size / 2) + 1 + i, int(kernel_size)),
+            ] = 0
+
     else:
-        raise FilterTypeException(
-            f"Invalid filter_type."
-        )
-        
+        raise FilterTypeException(f"Invalid filter_type.")
+
     return kernel
 
-def filter_pyfect(image, filter_type="blur", filter_size=3, custom_filter=None):
+
+def filter_pyfect(
+    image, filter_type="blur", filter_size=3, custom_filter=None
+):
     """
     This function can be used to apply predefined or custom filters on an image.
 
@@ -234,7 +272,7 @@ def filter_pyfect(image, filter_type="blur", filter_size=3, custom_filter=None):
        [0.27777778, 0.33333333, 0.38888889, 0.44444444],
        [0.55555556, 0.61111111, 0.66666667, 0.72222222],
        [0.83333333, 0.88888889, 0.94444444, 1.        ]])
-       
+
     >>> image = np.arange(1, 76).reshape(5, 5, 3)
     >>> kernel = np.ones((2,2,3))
     >>> filter_pyfect(image, filter_type="custom", custom_filter=kernel)[:,:,1]
@@ -242,7 +280,7 @@ def filter_pyfect(image, filter_type="blur", filter_size=3, custom_filter=None):
        [0.27777778, 0.33333333, 0.38888889, 0.44444444],
        [0.55555556, 0.61111111, 0.66666667, 0.72222222],
        [0.83333333, 0.88888889, 0.94444444, 1.        ]])
-       
+
     >>> image = np.arange(1, 26).reshape(5, 5)
     >>> filter_pyfect(image, filter_type="blur")
     array([[0.        , 0.08333333, 0.16666667],
@@ -283,7 +321,9 @@ def filter_pyfect(image, filter_type="blur", filter_size=3, custom_filter=None):
         filter_type != "custom"
         and (image.shape[0] <= filter_size or image.shape[1] <= filter_size)
     ):
-        raise ImageDimensionException("Image size has to be bigger than filter size")
+        raise ImageDimensionException(
+            "Image size has to be bigger than filter size"
+        )
 
     if image.ndim == 2:
         if filter_type != "custom":

@@ -166,10 +166,14 @@ def check_values(image, kernel_size):
         raise ValueError("Image must be a numpy array.")
 
     if not isinstance(kernel_size, int):
-        raise ValueError("kernel_size must be a positive integer greater than 0.")
+        raise ValueError(
+            "kernel_size must be a positive integer greater than 0."
+        )
 
     if kernel_size < 1:
-        raise ValueError("kernel_size must be a positive integer greater than 0.")
+        raise ValueError(
+            "kernel_size must be a positive integer greater than 0."
+        )
 
     # Check if the image is of the correct shape. Greyscale and colour images both accepted
     if len(image.shape) != 2 and len(image.shape) != 3:

@@ -53,7 +53,8 @@ def rotate_pyfect(image, n_rot=1):
     if len(image.shape) == 3:
         # Initialize dictionary with each channel being mapped to  it's channel number
         channel_dict = {
-            channel: image[:, :, channel] for channel in range(0, image.shape[2])
+            channel: image[:, :, channel]
+            for channel in range(0, image.shape[2])
         }
 
         # While rotations to do
@@ -63,7 +64,9 @@ def rotate_pyfect(image, n_rot=1):
                 # Pull matrix to rotate
                 rot_mat = channel_dict[channel]
                 # rotate the matrix
-                channel_dict[channel] = np.array([row[::-1] for row in zip(*rot_mat)])
+                channel_dict[channel] = np.array(
+                    [row[::-1] for row in zip(*rot_mat)]
+                )
 
             # Update number of rotations left
             n_rot = n_rot - 1
