@@ -28,7 +28,7 @@ Image processing is very popular in the Python ecosystem so we are aware that we
 
 ## Dependencies
 
-- TODO
+- TODO (important)
 
 ## Usage
 
