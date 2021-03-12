@@ -1,6 +1,5 @@
 from picturepyfect.compression_pyfect import compression_pyfect
 from picturepyfect.compression_pyfect import DimensionError
-from picturepyfect.rotate_pyfect import rotate_pyfect
 import pytest
 import numpy as np
 
