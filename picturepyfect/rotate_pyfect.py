@@ -3,11 +3,12 @@ import numpy as np
 
 def rotate_pyfect(image, n_rot=1):
     """
-    This function can be used to apply a rotational transformation on an image.
+    This rotate function can be used to apply a rotational transformation
+    on an image.
 
-    The function can be applied on greyscale or 3-channel images. The users can
-    choose some degree, theta, which is used in a rotational matrix
-    operation to transform the image.
+    The function can be applied on greyscale or 3-channel images.
+    The users can choose some degree, theta, which is used in a rotational
+    matrix operation to transform the image.
 
     Parameters
     ----------
@@ -20,7 +21,8 @@ def rotate_pyfect(image, n_rot=1):
     Returns:
     ---------
     rotated_image: numpy.ndarray
-        A n*n or n*n*3 numpy array which is the input image rotated by a multiple of 90 degrees
+        A n*n or n*n*3 numpy array which is the input image rotated by a
+        multiple of 90 degrees
 
     Examples
     --------
@@ -51,7 +53,8 @@ def rotate_pyfect(image, n_rot=1):
         raise TypeError("Invalid Type: Image must by 2 or 3 dimensional")
 
     if len(image.shape) == 3:
-        # Initialize dictionary with each channel being mapped to  it's channel number
+        # Initialize dictionary with each channel being mapped to
+        # it's channel number
         channel_dict = {
             channel: image[:, :, channel]
             for channel in range(0, image.shape[2])
