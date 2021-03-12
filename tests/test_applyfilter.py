@@ -9,10 +9,6 @@ from pytest import raises
 import numpy as np
 
 
-def test_version():
-    assert __version__ == "0.1.0"
-
-
 def test_exceptions():
     image = np.arange(1, 26).reshape(5, 5)
     with raises(FilterTypeException):
