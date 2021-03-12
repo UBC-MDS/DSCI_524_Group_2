@@ -16,6 +16,7 @@ test_image_2d_2 = rotate_pyfect(test_image_2d, 2)
 test_image_2d_3 = rotate_pyfect(test_image_2d, 3)
 test_image_2d_4 = rotate_pyfect(test_image_2d, 4)
 
+
 # test error handling
 def test_error():
     with pytest.raises(TypeError):

@@ -41,8 +41,8 @@ def filter_pyfect_2D(image, kernel):
     ---------
     filtered_image: numpy.ndarray
         Result of the filtering as a 2D numpy array. Please note that the
-        values are scaled so that they are between range of 0 and 1 using minmax scaler
-        for plotting stability
+        values are scaled so that they are between range of 0 and 1 using
+        minmax scaler for plotting stability
 
     Examples
     --------
@@ -110,8 +110,8 @@ def filter_pyfect_3D(image, kernel):
     ---------
     filtered_image: numpy.ndarray
         Result of the filtering as a 3D numpy array. Please note that the
-        values are scaled so that they are between range of 0 and 1 using minmax scaler
-        within each channel for plotting stability
+        values are scaled so that they are between range of 0 and 1 using
+        minmax scaler within each channel for plotting stability
 
     Examples
     --------
@@ -222,7 +222,7 @@ def build_filter(kernel_type, kernel_size):
             ] = 0
 
     else:
-        raise FilterTypeException(f"Invalid filter_type.")
+        raise FilterTypeException("Invalid filter_type.")
 
     return kernel
 
@@ -231,17 +231,18 @@ def filter_pyfect(
     image, filter_type="blur", filter_size=3, custom_filter=None
 ):
     """
-    This function can be used to apply predefined or custom filters on an image.
+    This function applies predefined or custom filters on an image.
 
-    The function can be applied on single channel or 3-channel images. The users can
-    choose from predefined filters or can create their new filters. This can be used
-    for various purposes like entertainment application or visualization of
-    convolutional neural network.
+    The function can be applied on single channel or 3-channel images.
+    The users can choose from predefined filters or can create their new
+    filters. This can be used for various purposes like entertainment
+    application or visualization of convolutional neural network.
 
     Parameters
     ----------
     image : numpy.ndarray
-        A n1*n2 or n1*n2*3 numpy array to representing single channel or 3-channel image
+        A n1*n2 or n1*n2*3 numpy array to representing single channel
+        or 3-channel image
 
     filter_type : string
         One of the following values:
@@ -255,8 +256,8 @@ def filter_pyfect(
         This is used if the filter_type is not custom. Default: 3
 
     custom_filter: numpy.ndarray
-        A k1*k2 or k1*k2*3 numpy array allows users to pass their own filter. This is only
-        used if the users select filter_type = "custom"
+        A k1*k2 or k1*k2*3 numpy array allows users to pass their own filter.
+        This is only used if the users select filter_type = "custom"
 
     Returns:
     ---------
@@ -273,20 +274,19 @@ def filter_pyfect(
        [0.55555556, 0.61111111, 0.66666667, 0.72222222],
        [0.83333333, 0.88888889, 0.94444444, 1.        ]])
 
-    >>> image = np.arange(1, 76).reshape(5, 5, 3)
+    >>> img = np.arange(1, 76).reshape(5, 5, 3)
     >>> kernel = np.ones((2,2,3))
-    >>> filter_pyfect(image, filter_type="custom", custom_filter=kernel)[:,:,1]
+    >>> filter_pyfect(img, filter_type="custom", custom_filter=kernel)[:,:,1]
     array([[0.        , 0.05555556, 0.11111111, 0.16666667],
        [0.27777778, 0.33333333, 0.38888889, 0.44444444],
        [0.55555556, 0.61111111, 0.66666667, 0.72222222],
        [0.83333333, 0.88888889, 0.94444444, 1.        ]])
 
-    >>> image = np.arange(1, 26).reshape(5, 5)
-    >>> filter_pyfect(image, filter_type="blur")
+    >>> img = np.arange(1, 26).reshape(5, 5)
+    >>> filter_pyfect(img, filter_type="blur")
     array([[0.        , 0.08333333, 0.16666667],
        [0.41666667, 0.5       , 0.58333333],
        [0.83333333, 0.91666667, 1.        ]])
-
     """
     valid_filters = ["blur", "sharpen", "custom"]
     valid_dimensions = [2, 3]
@@ -300,7 +300,9 @@ def filter_pyfect(
         image.ndim == 3 and image.shape[2] != 3
     ):
         raise ImageDimensionException(
-            f"Invalid dimension of the image. Please use 2D or 3D images. In case of 3D images, there should be 3 channels"
+            """Invalid dimension of the image. Please use 2D or 3D images.
+            In case of 3D images, there should be 3 channels
+            """
         )
 
     if filter_type == "custom" and (
@@ -308,7 +310,10 @@ def filter_pyfect(
         or (custom_filter.ndim == 3 and custom_filter.shape[2] != 3)
     ):
         raise FilterDimensionException(
-            f"Invalid dimension of the filter. Please use 2D or 3D filters. In case of 3D filters, there should be 3 channels"
+           """
+           Invalid dimension of the filter. Please use 2D or 3D filters.
+           In case of 3D filters, there should be 3 channels"
+           """
         )
 
     if (
