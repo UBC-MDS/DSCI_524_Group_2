@@ -10,10 +10,10 @@ pure_blue = get_property(plt.imread("./img/blue.png"))
 pure_white = get_property(plt.imread("./img/white.png"))
 pure_black = get_property(plt.imread("./img/black.png"))
 pure_black = get_property(plt.imread("./img/black.png"))
-wrong_dim1 = np.zeros([1,1])
-wrong_dim2 = np.zeros([1,1,1])
-wrong_dim3 = np.zeros([1,1,2])
-wrong_dim4 = np.zeros([1,1,5])
+wrong_dim1 = np.zeros([1, 1])
+wrong_dim2 = np.zeros([1, 1, 1])
+wrong_dim3 = np.zeros([1, 1, 2])
+wrong_dim4 = np.zeros([1, 1, 5])
 
 # test error handling
 def test_error():
@@ -34,6 +34,7 @@ def test_error():
     with pytest.raises(TypeError):
         get_property(wrong_dim4)
 
+
 # test get_property returned dimensions
 def test_image_dimensions():
     assert pure_red["dimension"] == [200, 150]
@@ -41,6 +42,7 @@ def test_image_dimensions():
     assert pure_blue["dimension"] == [200, 150]
     assert pure_white["dimension"] == [200, 150]
     assert pure_black["dimension"] == [200, 150]
+
 
 # test get_property returned total pixels
 def test_total_pixels():
@@ -50,6 +52,7 @@ def test_total_pixels():
     assert pure_white["total_pixels"] == 30000
     assert pure_black["total_pixels"] == 30000
 
+
 # test get_property returned r channel values
 def test_r_channel():
     assert pure_red["r_channel"] == [1.0, 1.0]
@@ -58,6 +61,7 @@ def test_r_channel():
     assert pure_white["r_channel"] == [1.0, 1.0]
     assert pure_black["r_channel"] == [0.0, 0.0]
 
+
 # test get_property returned g channel values
 def test_g_channel():
     assert pure_red["g_channel"] == [0.0, 0.0]
@@ -65,6 +69,7 @@ def test_g_channel():
     assert pure_blue["g_channel"] == [0.0, 0.0]
     assert pure_white["g_channel"] == [1.0, 1.0]
     assert pure_black["g_channel"] == [0.0, 0.0]
+
 
 # test get_property returned b channel values
 def test_b_channel():

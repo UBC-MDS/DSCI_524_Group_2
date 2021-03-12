@@ -1,9 +1,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 def get_property(image):
     """
-    Extract RGB or RGBA image properties. The output properties includes means and medians 
+    Extract RGB or RGBA image properties. The output properties includes means and medians
     of RGB channels along with the file dimension and total pixels.
     Parameters
     ----------
@@ -21,22 +22,31 @@ def get_property(image):
     r_channel: [80, 90], g_channel: [120, 90], b_channel: [155, 160]}
     """
     # error handling for invalid type
-    if (type(image) != np.ndarray) or (len(image.shape) != 3) \
-        or (image.shape[2] < 3) or (image.shape[2] > 4):
-        raise TypeError('Invalid Type: RGB or RGBA image type must be a 3D or 4D numpy array')
+    if (
+        (type(image) != np.ndarray)
+        or (len(image.shape) != 3)
+        or (image.shape[2] < 3)
+        or (image.shape[2] > 4)
+    ):
+        raise TypeError(
+            "Invalid Type: RGB or RGBA image type must be a 3D or 4D numpy array"
+        )
 
     print(image.shape)
 
     # obtain image properties
     dimension = [image.shape[0], image.shape[1]]
     total_pixels = dimension[0] * dimension[1]
-    channel_means = [image[:,:,i].flatten().mean() for i in range(0, 3)]
-    channel_medians = [np.median(image[:,:,i].flatten()) for i in range(0, 3)]
-    image_properties = {"dimension": dimension, 
-                        "total_pixels": total_pixels,
-                        "r_channel": [channel_means[0], channel_medians[0]], 
-                        "g_channel": [channel_means[1], channel_medians[1]], 
-                        "b_channel": [channel_means[2], channel_medians[2]]}
-
+    channel_means = [image[:, :, i].flatten().mean() for i in range(0, 3)]
+    channel_medians = [
+        np.median(image[:, :, i].flatten()) for i in range(0, 3)
+    ]
+    image_properties = {
+        "dimension": dimension,
+        "total_pixels": total_pixels,
+        "r_channel": [channel_means[0], channel_medians[0]],
+        "g_channel": [channel_means[1], channel_medians[1]],
+        "b_channel": [channel_means[2], channel_medians[2]],
+    }
     # return the dictionary of image property
     return image_properties

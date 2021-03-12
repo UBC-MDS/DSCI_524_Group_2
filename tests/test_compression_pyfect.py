@@ -29,30 +29,43 @@ def test_compression_pyfect():
     assert (
         compression_pyfect(img1, kernel_size=1, pooling_function="max") == img1
     ).all(), "Max pooling algorithm is failing on 2D image, kernel_size 1."
-    assert compression_pyfect(img1, kernel_size=2, pooling_function="max") == np.array(
+    assert compression_pyfect(
+        img1, kernel_size=2, pooling_function="max"
+    ) == np.array(
         [[5]]
     ), "Max pooling algorithm is failing on 2D image, kernel_size 2."
-    assert compression_pyfect(img1, kernel_size=3, pooling_function="max") == np.array(
+    assert compression_pyfect(
+        img1, kernel_size=3, pooling_function="max"
+    ) == np.array(
         [[8]]
     ), "Max pooling algorithm is failing on 2D image, kernel_size 3."
 
     assert (
         compression_pyfect(img1, kernel_size=1, pooling_function="min") == img1
     ).all(), "Min pooling algorithm is failing on 2D image, kernel_size 1."
-    assert compression_pyfect(img1, kernel_size=2, pooling_function="min") == np.array(
+    assert compression_pyfect(
+        img1, kernel_size=2, pooling_function="min"
+    ) == np.array(
         [[2]]
     ), "Min pooling algorithm is failing on 2D image, kernel_size 2."
-    assert compression_pyfect(img1, kernel_size=3, pooling_function="min") == np.array(
+    assert compression_pyfect(
+        img1, kernel_size=3, pooling_function="min"
+    ) == np.array(
         [[0]]
     ), "Min pooling algorithm is failing on 2D image, kernel_size 3."
 
     assert (
-        compression_pyfect(img1, kernel_size=1, pooling_function="mean") == img1
+        compression_pyfect(img1, kernel_size=1, pooling_function="mean")
+        == img1
     ).all(), "Mean pooling algorithm is failing on 2D image, kernel_size 1."
-    assert compression_pyfect(img1, kernel_size=2, pooling_function="mean") == np.array(
+    assert compression_pyfect(
+        img1, kernel_size=2, pooling_function="mean"
+    ) == np.array(
         [[3.25]]
     ), "Mean pooling algorithm is failing on 2D image, kernel_size 2."
-    assert compression_pyfect(img1, kernel_size=3, pooling_function="mean") == np.array(
+    assert compression_pyfect(
+        img1, kernel_size=3, pooling_function="mean"
+    ) == np.array(
         [[3]]
     ), "Mean pooling algorithm is failing on 2D image, kernel_size 3."
 
@@ -78,13 +91,17 @@ def test_compression_pyfect():
     ).all(), "Min pooling algorithm is failing on 3D image, kernel_size 3."
 
     assert (
-        compression_pyfect(img2, kernel_size=1, pooling_function="mean") == img2
+        compression_pyfect(img2, kernel_size=1, pooling_function="mean")
+        == img2
     ).all(), "Mean pooling algorithm is failing on 3D image, kernel_size 1."
     assert (
-        compression_pyfect(img2, kernel_size=2, pooling_function="mean") == out3
+        compression_pyfect(img2, kernel_size=2, pooling_function="mean")
+        == out3
     ).all(), "Mean pooling algorithm is failing on 3D image, kernel_size 2."
     assert (
-        np.round(compression_pyfect(img2, kernel_size=3, pooling_function="mean"), 2)
+        np.round(
+            compression_pyfect(img2, kernel_size=3, pooling_function="mean"), 2
+        )
         == out6
     ).all(), "Mean pooling algorithm is failing on 3D image, kernel_size 3."
 
@@ -106,7 +123,9 @@ def test_compression_pyfect():
 
     # Test image argument
     with pytest.raises(DimensionError):
-        compression_pyfect(np.array([2]), kernel_size=1, pooling_function="max")
+        compression_pyfect(
+            np.array([2]), kernel_size=1, pooling_function="max"
+        )
     with pytest.raises(DimensionError):
         compression_pyfect(
             np.array([[[1]], [[2]], [[3]], [[4]]]),
