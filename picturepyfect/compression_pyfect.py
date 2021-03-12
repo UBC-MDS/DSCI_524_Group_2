@@ -10,23 +10,27 @@ def compression_pyfect(image, kernel_size=2, pooling_function="max"):
     """
     This function uses a lossy pooling algorithm to compress an image.
 
-    The function can be applied to single channel or 3-channel images. The user passes
-    an image which is to be compressed and the resulting compressed numpy array is returned.
-    The user can also specify the pooling algorithm to be used and the size of the kernel
+    The function can be applied to single channel or 3-channel images.
+    The user passes an image which is to be compressed and the resulting
+    compressed numpy array is returned. The user can also specify the pooling
+    algorithm to be used and the size of the kernel
     to apply over the image.
 
     Parameters
     ----------
     image : numpy.ndarray
-        A n*n or n*n*3 numpy array representing a single channel or 3-channel image.
+        A n*n or n*n*3 numpy array representing a single channel or a
+        3-channel image.
 
     kernel_size : int
-        The size of the kernel to be passed over the image. The resulting filter moving
-        across the image will be a 2D array with dimensions kernel_size x kernel_size.
+        The size of the kernel to be passed over the image. The resulting
+        filter moving across the image will be a 2D array with dimensions
+        kernel_size x kernel_size.
         Default: 2
 
     pooling_function : str
-        The pooling algorithm to be used within a kernel. There are three options: "max", "min", and "mean".
+        The pooling algorithm to be used within a kernel. There are three
+        options: "max", "min", and "mean".
         Default: "max"
 
     Returns:
@@ -55,7 +59,10 @@ def compression_pyfect(image, kernel_size=2, pooling_function="max"):
         pool_func = np.mean
     else:
         raise ValueError(
-            "The pooling_function argument only takes a value of 'max', 'min', or 'mean'."
+            """
+            The pooling_function argument only takes a value of 'max',
+            'min', or 'mean'.
+            """
         )
 
     # If image is not divisible by the kernel_size
@@ -84,11 +91,11 @@ def compression_pyfect(image, kernel_size=2, pooling_function="max"):
 
 def pool_band(band, kernel_size, pool_func):
     """
-    This function is to be used in conjunction with compression_pyfect and compresses
-    a single colour band of an image.
+    This function is to be used in conjunction with compression_pyfect
+    and compresses a single colour band of an image.
 
-    The function applies a lossy pooling algorithm to compress the specified colour band
-    and the resulting compressed numpy array is returned.
+    The function applies a lossy pooling algorithm to compress the specified
+    colour band and the resulting compressed numpy array is returned.
 
     Parameters
     ----------
@@ -96,11 +103,13 @@ def pool_band(band, kernel_size, pool_func):
         A n*n numpy array representing a single colour band of an image.
 
     kernel_size : int
-        The size of the kernel to be passed over the image. The resulting filter moving
-        across the image will be a 2D array with dimensions kernel_size x kernel_size.
+        The size of the kernel to be passed over the image. The resulting
+        filter moving across the image will be a 2D array with dimensions
+        kernel_size x kernel_size.
 
     pooling_function : str
-        The pooling algorithm to be used within a kernel. There are three options: "max", "min", and "mean".
+        The pooling algorithm to be used within a kernel. There are three
+        options: "max", "min", and "mean".
 
     Returns:
     ---------
@@ -117,9 +126,7 @@ def pool_band(band, kernel_size, pool_func):
     """
 
     # Using this forum post as a guide and reference for the below code
-    # https://stackoverflow.com/questions/42463172/how-to-perform-max-mean-pooling-on-a-2d-array-using-numpy/42463514#42463514
-
-    row = band.shape[0] // kernel_size
+    # https://tinyurl.com/yhnbexcs
     col = band.shape[1] // kernel_size
 
     # The colour band to pool
@@ -151,11 +158,13 @@ def check_values(image, kernel_size):
     Parameters
     ----------
     image : numpy.ndarray
-        A n*n or n*n*3 numpy array representing a single channel or 3-channel image.
+        A n*n or n*n*3 numpy array representing a single channel or 3-channel
+        image.
 
     kernel_size : int
-        The size of the kernel to be passed over the image. The resulting filter moving
-        across the image will be a 2D array with dimensions kernel_size x kernel_size.
+        The size of the kernel to be passed over the image. The resulting
+        filter moving across the image will be a 2D array with dimensions
+        kernel_size x kernel_size.
 
     Examples
     --------
@@ -175,21 +184,32 @@ def check_values(image, kernel_size):
             "kernel_size must be a positive integer greater than 0."
         )
 
-    # Check if the image is of the correct shape. Greyscale and colour images both accepted
+    # Check if the image is of the correct shape.
+    # Greyscale and colour images both accepted
     if len(image.shape) != 2 and len(image.shape) != 3:
         raise DimensionError(
-            "The input image array needs to be of shape n x n, or n x n x 3."
+            """
+            The input image array needs to be of shape n x n,
+            or n x n x 3.
+            """
         )
 
-    # If the image is of size n x n x n, ensure that the third dimension equals 3.
+    # If the image is of size n x n x n,
+    # ensure that the third dimension equals 3.
     if len(image.shape) == 3:
         if image.shape[2] != 3:
             raise DimensionError(
-                "The input image array needs to be of shape n x n, or n x n x 3."
+                """
+                The input image array needs to be of shape n x n,
+                or n x n x 3.
+                """
             )
 
     # Check that the kernel_size is smaller than the image height and width
     if image.shape[0] < kernel_size or image.shape[1] < kernel_size:
         raise ValueError(
-            "The kernel size must not be larger than the height or width of the input image array."
+            """
+            The kernel size must not be larger than the height or width of
+            the input image array.
+            """
         )
