@@ -69,8 +69,7 @@ def test_filter_pyfect_2D():
 
     assert (
         np.isclose(expected_result, flt.filter_pyfect_2D(image, kernel))
-        == False
-    ).sum() == 0, "Sub-Module filter_pyfect_2D returned unexpected value(s)"
+    ).sum() == 16, "Sub-Module filter_pyfect_2D returned unexpected value(s)"
 
     image = np.ones((5, 5))
     kernel = np.ones((2, 2))
@@ -82,8 +81,7 @@ def test_filter_pyfect_2D():
     ), "Sub-Module filter_pyfect_2D returned unexpected dimension"
     assert (
         np.isclose(expected_result, flt.filter_pyfect_2D(image, kernel))
-        == False
-    ).sum() == 0, "Sub-Module filter_pyfect_2D returned unexpected value(s)"
+    ).sum() == 16, "Sub-Module filter_pyfect_2D returned unexpected value(s)"
 
 
 # Sub-module filter_pyfect_3D check
@@ -109,20 +107,17 @@ def test_filter_pyfect_3D():
         np.isclose(
             flt.filter_pyfect_3D(image, kernel)[:, :, 0], expected_result
         )
-        == False
-    ).sum() == 0, "Sub-Module filter_pyfect_3D 1st channel failed"
+    ).sum() == 16, "Sub-Module filter_pyfect_3D 1st channel failed"
     assert (
         np.isclose(
             flt.filter_pyfect_3D(image, kernel)[:, :, 1], expected_result
         )
-        == False
-    ).sum() == 0, "Sub-Module filter_pyfect_3D 2nd channel failed"
+    ).sum() == 16, "Sub-Module filter_pyfect_3D 2nd channel failed"
     assert (
         np.isclose(
             flt.filter_pyfect_3D(image, kernel)[:, :, 2], expected_result
         )
-        == False
-    ).sum() == 0, "Sub-Module filter_pyfect_3D 3rd channel failed"
+    ).sum() == 16, "Sub-Module filter_pyfect_3D 3rd channel failed"
 
 
 # Sub-module build_filter check
@@ -143,11 +138,11 @@ def test_build_filter():
     )
 
     assert (
-        np.isclose(flt.build_filter("blur", 3), expected_blur) == False
-    ).sum() == 0, "Blur filter check failed"
+        np.isclose(flt.build_filter("blur", 3), expected_blur)
+    ).sum() == 9, "Blur filter check failed"
     assert (
-        np.isclose(flt.build_filter("sharpen", 7), expected_sharpen) == False
-    ).sum() == 0, "Sharpen filter check failed"
+        np.isclose(flt.build_filter("sharpen", 7), expected_sharpen)
+    ).sum() == 49, "Sharpen filter check failed"
 
 
 # Main-module filter_pyfect check
@@ -176,8 +171,7 @@ def test_filter_pyfect():
                 image, filter_type="custom", custom_filter=kernel
             ),
         )
-        == False
-    ).sum() == 0, "Main-Module filter_pyfect returned unexpected value(s)"
+    ).sum() == 16, "Main-Module filter_pyfect returned unexpected value(s)"
 
     image = np.arange(1, 26).reshape(5, 5)
     kernel = np.ones((2, 2, 3))
@@ -202,8 +196,7 @@ def test_filter_pyfect():
                 image, filter_type="custom", custom_filter=kernel
             ),
         )
-        == False
-    ).sum() == 0, "Main-Module filter_pyfect returned unexpected value(s)"
+    ).sum() == 16, "Main-Module filter_pyfect returned unexpected value(s)"
 
     image = np.arange(1, 26).reshape(5, 5)
     kernel = np.ones((2, 2))
@@ -224,8 +217,7 @@ def test_filter_pyfect():
         np.isclose(
             expected_result, flt.filter_pyfect(image, filter_type="blur")
         )
-        == False
-    ).sum() == 0, "Main-Module filter_pyfect returned unexpected value(s)"
+    ).sum() == 9, "Main-Module filter_pyfect returned unexpected value(s)"
 
     image = np.arange(1, 76).reshape(5, 5, 3)
     kernel = np.ones((2, 2, 3))
@@ -253,8 +245,7 @@ def test_filter_pyfect():
             )[:, :, 0],
             expected_result,
         )
-        == False
-    ).sum() == 0, "Main-Module filter_pyfect 1st channel failed"
+    ).sum() == 16, "Main-Module filter_pyfect 1st channel failed"
     assert (
         np.isclose(
             flt.filter_pyfect(
@@ -262,8 +253,7 @@ def test_filter_pyfect():
             )[:, :, 1],
             expected_result,
         )
-        == False
-    ).sum() == 0, "Main-Module filter_pyfect 2nd channel failed"
+    ).sum() == 16, "Main-Module filter_pyfect 2nd channel failed"
     assert (
         np.isclose(
             flt.filter_pyfect(
@@ -271,8 +261,7 @@ def test_filter_pyfect():
             )[:, :, 2],
             expected_result,
         )
-        == False
-    ).sum() == 0, "Main-Module filter_pyfect 3rd channel failed"
+    ).sum() == 16, "Main-Module filter_pyfect 3rd channel failed"
 
     image = np.arange(1, 76).reshape(5, 5, 3)
     kernel = np.ones((2, 2))
@@ -298,8 +287,7 @@ def test_filter_pyfect():
             )[:, :, 0],
             expected_result,
         )
-        == False
-    ).sum() == 0, "Main-Module filter_pyfect 1st channel failed"
+    ).sum() == 16, "Main-Module filter_pyfect 1st channel failed"
     assert (
         np.isclose(
             flt.filter_pyfect(
@@ -307,8 +295,7 @@ def test_filter_pyfect():
             )[:, :, 1],
             expected_result,
         )
-        == False
-    ).sum() == 0, "Main-Module filter_pyfect 2nd channel failed"
+    ).sum() == 16, "Main-Module filter_pyfect 2nd channel failed"
     assert (
         np.isclose(
             flt.filter_pyfect(
@@ -316,8 +303,7 @@ def test_filter_pyfect():
             )[:, :, 2],
             expected_result,
         )
-        == False
-    ).sum() == 0, "Main-Module filter_pyfect 3rd channel failed"
+    ).sum() == 16, "Main-Module filter_pyfect 3rd channel failed"
 
     image = np.arange(1, 76).reshape(5, 5, 3)
     expected_result = np.array(
@@ -338,19 +324,16 @@ def test_filter_pyfect():
             flt.filter_pyfect(image, filter_type="blur")[:, :, 0],
             expected_result,
         )
-        == False
-    ).sum() == 0, "Main-Module filter_pyfect 1st channel failed"
+    ).sum() == 9, "Main-Module filter_pyfect 1st channel failed"
     assert (
         np.isclose(
             flt.filter_pyfect(image, filter_type="blur")[:, :, 1],
             expected_result,
         )
-        == False
-    ).sum() == 0, "Main-Module filter_pyfect 2nd channel failed"
+    ).sum() == 9, "Main-Module filter_pyfect 2nd channel failed"
     assert (
         np.isclose(
             flt.filter_pyfect(image, filter_type="blur")[:, :, 2],
             expected_result,
         )
-        == False
-    ).sum() == 0, "Main-Module filter_pyfect 3rd channel failed"
+    ).sum() == 9, "Main-Module filter_pyfect 3rd channel failed"
