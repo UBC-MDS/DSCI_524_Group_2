@@ -15,6 +15,7 @@ wrong_dim2 = np.zeros([1, 1, 1])
 wrong_dim3 = np.zeros([1, 1, 2])
 wrong_dim4 = np.zeros([1, 1, 5])
 
+
 # test error handling
 def test_error():
     with pytest.raises(TypeError):
