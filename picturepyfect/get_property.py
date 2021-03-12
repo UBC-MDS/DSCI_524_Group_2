@@ -1,11 +1,12 @@
 import numpy as np
-import matplotlib.pyplot as plt
 
 
 def get_property(image):
     """
-    Extract RGB or RGBA image properties. The output properties includes means and medians
-    of RGB channels along with the file dimension and total pixels.
+    Extract RGB or RGBA image properties. The output properties includes
+    means and medians of RGB channels along with the file dimension and total
+    pixels.
+
     Parameters
     ----------
     image : numpy.ndarray
@@ -13,8 +14,9 @@ def get_property(image):
     Returns:
     ---------
     image_property: dictionary
-        a dictionary of image properties for dimension of width and height, total pixels,
-        and each channel's mean and median value stored as a list for each channel.
+        a dictionary of image properties for dimension of width and height,
+        total pixels, and each channel's mean and median value stored as a
+        list for each channel.
     Examples
     ---------
     >>> get_property(image)
@@ -29,7 +31,10 @@ def get_property(image):
         or (image.shape[2] > 4)
     ):
         raise TypeError(
-            "Invalid Type: RGB or RGBA image type must be a 3D or 4D numpy array"
+            """
+            Invalid Type: RGB or RGBA image type must be a 3D or 4D
+            numpyarray
+            """
         )
 
     print(image.shape)
@@ -48,5 +53,6 @@ def get_property(image):
         "g_channel": [channel_means[1], channel_medians[1]],
         "b_channel": [channel_means[2], channel_medians[2]],
     }
+
     # return the dictionary of image property
     return image_properties
