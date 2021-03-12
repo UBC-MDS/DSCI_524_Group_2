@@ -1,7 +1,7 @@
 name: Deploy
 
 on:
-  # Trigger the workflow on push or pull request to main
+  # Trigger the workflow on push or pull request to master
   push:
     branches:
       - master
@@ -34,7 +34,7 @@ jobs:
     - name: checkout
       uses: actions/checkout@master
       with:
-        ref: main
+        ref: master
     - name: Bump version and tagging and publish
       run: |
         git config --local user.email "action@github.com"
