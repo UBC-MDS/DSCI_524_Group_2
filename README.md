@@ -1,6 +1,6 @@
 # picturepyfect 
 
-![](https://github.com/debanandasarkar/picturepyfect/workflows/build/badge.svg) [![codecov](https://codecov.io/gh/debanandasarkar/picturepyfect/branch/main/graph/badge.svg)](https://codecov.io/gh/debanandasarkar/picturepyfect) ![Release](https://github.com/debanandasarkar/picturepyfect/workflows/Release/badge.svg) [![Documentation Status](https://readthedocs.org/projects/picturepyfect/badge/?version=latest)](https://picturepyfect.readthedocs.io/en/latest/?badge=latest)
+![](https://github.com/UBC-MDS/picturepyfect/workflows/build/badge.svg) [![codecov](https://codecov.io/gh/UBC-MDS/picturepyfect/branch/main/graph/badge.svg)](https://codecov.io/gh/UBC-MDS/picturepyfect) [![Deploy](https://github.com/UBC-MDS/picturepyfect/actions/workflows/deploy.yml/badge.svg)](https://github.com/UBC-MDS/picturepyfect/actions/workflows/deploy.yml) [![Documentation Status](https://readthedocs.org/projects/picturepyfect/badge/?version=latest)](https://picturepyfect.readthedocs.io/en/latest/?badge=latest)
 
 A fun Python utility package to make your pictures perfect! The package enables users to process, manipulate, and gather data about their images.
 
