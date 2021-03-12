@@ -1,4 +1,3 @@
-from picturepyfect import __version__
 from picturepyfect import applyfilter as flt
 from picturepyfect.applyfilter import (
     FilterTypeException,
@@ -238,8 +237,6 @@ def test_filter_pyfect():
             [0.83333333, 0.88888889, 0.94444444, 1.0],
         ]
     )
-
-    # print(flt.filter_pyfect(image, filter_type="custom", custom_filter=kernel).shape)
 
     assert flt.filter_pyfect(
         image, filter_type="custom", custom_filter=kernel
