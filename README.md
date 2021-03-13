@@ -44,7 +44,52 @@ Image processing is very popular in the Python ecosystem so we are aware that we
 
 ## Usage
 
-TODO
+* `filter_pyfect_2D(image, kernel)`
+```
+    Examples
+    --------
+    >>> image = np.arange(1, 26).reshape(5, 5)
+    >>> kernel = np.ones((2,2))
+    >>> filter_pyfect_2D(image, kernel)
+    array([[0.        , 0.05555556, 0.11111111, 0.16666667],
+           [0.27777778, 0.33333333, 0.38888889, 0.44444444],
+           [0.55555556, 0.61111111, 0.66666667, 0.72222222],
+           [0.83333333, 0.88888889, 0.94444444, 1.        ]])
+```
+
+* `rotate_pyfect(image, n_rot=1)`
+```
+    Examples
+    --------
+    >>> np.random.seed(42)
+    >>> image = np.random.rand(2, 2, 1)
+    >>> rotate_pyfect(image, deg=1)
+    array([[[0.73199394],
+        [0.37454012]],
+       [[0.59865848],
+        [0.95071431]]])
+```
+
+* `compression_pyfect(image, kernel_size=2, pooling_function="max")`
+```
+    Examples
+    --------
+    >>> compression_pyfect(image, kernel_size=3, pooling_function="max")
+    array([[0.04737957, 0.04648845, 0.04256656, 0.04519495],
+       [0.04657273, 0.04489012, 0.04031093, 0.04047667],
+       [0.04641026, 0.04106843, 0.04560866, 0.04732271],
+       [0.0511907 , 0.04518351, 0.04946411, 0.04030291]])
+```
+
+* `get_property(image)`
+```
+    Examples
+    ---------
+    >>> get_property(image)
+    {dimension: [1280, 720], total_pixels: 921600,
+    r_channel: [80, 90], g_channel: [120, 90], b_channel: [155, 160]}
+```
+
 
 ## Documentation
 
