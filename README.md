@@ -28,11 +28,23 @@ Image processing is very popular in the Python ecosystem so we are aware that we
 
 ## Dependencies
 
-- TODO (important)
+[tool.poetry.dependencies]  
+* python = "^3.8"  
+* numpy = "^1.20.1"  
+* matplotlib = "^3.3.4"  
+
+[tool.poetry.dev-dependencies]  
+* pytest = "^6.2.2"  
+* pytest-cov = "^2.11.1"  
+* codecov = "^2.1.11"  
+* python-semantic-release = "^7.15.0"  
+* flake8 = "^3.8.4"  
+* Sphinx = "^3.5.2"  
+* sphinxcontrib-napoleon = "^0.7"  
 
 ## Usage
 
-- TODO
+TODO
 
 ## Documentation
 
