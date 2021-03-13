@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "picturepyfect"
-version = "0.1.6"
+version = "0.1.7"
 description = "A fun package to process images"
 authors = ["Debananda Sarkar <sarkar.debananda.1@gmail.com>"]
 license = "MIT"
