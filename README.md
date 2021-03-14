@@ -105,10 +105,7 @@ imshow(filtered_img)
 ```
 
 ![png](/img/output_5_1.png)
-    
-```python
 
-```
 ## Documentation
 
 The official documentation is hosted on Read the Docs: https://picturepyfect.readthedocs.io/en/latest/
