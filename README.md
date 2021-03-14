@@ -44,53 +44,71 @@ Image processing is very popular in the Python ecosystem so we are aware that we
 
 ## Usage
 
-* `filter_pyfect_2D(image, kernel)`
-```
-    Examples
-    --------
-    >>> image = np.arange(1, 26).reshape(5, 5)
-    >>> kernel = np.ones((2,2))
-    >>> filter_pyfect_2D(image, kernel)
-    array([[0.        , 0.05555556, 0.11111111, 0.16666667],
-           [0.27777778, 0.33333333, 0.38888889, 0.44444444],
-           [0.55555556, 0.61111111, 0.66666667, 0.72222222],
-           [0.83333333, 0.88888889, 0.94444444, 1.        ]])
-```
+```python
+from picturepyfect.compression_pyfect import compression_pyfect
+from picturepyfect.rotate_pyfect import rotate_pyfect
+from picturepyfect.get_property import get_property
+from picturepyfect.applyfilter import filter_pyfect
 
-* `rotate_pyfect(image, n_rot=1)`
-```
-    Examples
-    --------
-    >>> np.random.seed(42)
-    >>> image = np.random.rand(2, 2, 1)
-    >>> rotate_pyfect(image, deg=1)
-    array([[[0.73199394],
-        [0.37454012]],
-       [[0.59865848],
-        [0.95071431]]])
-```
-
-* `compression_pyfect(image, kernel_size=2, pooling_function="max")`
-```
-    Examples
-    --------
-    >>> compression_pyfect(image, kernel_size=3, pooling_function="max")
-    array([[0.04737957, 0.04648845, 0.04256656, 0.04519495],
-       [0.04657273, 0.04489012, 0.04031093, 0.04047667],
-       [0.04641026, 0.04106843, 0.04560866, 0.04732271],
-       [0.0511907 , 0.04518351, 0.04946411, 0.04030291]])
-```
-
-* `get_property(image)`
-```
-    Examples
-    ---------
-    >>> get_property(image)
-    {dimension: [1280, 720], total_pixels: 921600,
-    r_channel: [80, 90], g_channel: [120, 90], b_channel: [155, 160]}
+# Additional imports needed for this example
+import os
+import numpy as np
+from matplotlib.pyplot import imread, imshow
 ```
 
 
+```python
+# Read in your image
+img = imread(os.path.join("beautiful_Vancouver.jpeg"))
+
+# Check your image
+imshow(img)
+```
+
+    
+![png](/img/output_1_1.png)
+    
+
+```python
+# Rotate the image 90 degrees
+rotated_img = rotate_pyfect(img, n_rot=1)
+imshow(rotated_img)
+```
+    
+![png](/img/output_2_1.png)
+    
+
+```python
+# Compress the image
+compressed_img = compression_pyfect(img, kernel_size=16, pooling_function="max")
+imshow(compressed_img)
+```
+
+![png](/img/output_3_1.png)
+
+```python
+# Get image properties
+get_property(img)
+```
+    (768, 1024, 3)
+
+    {'dimension': [768, 1024],
+     'total_pixels': 786432,
+     'r_channel': [116.49133936564128, 104.0],
+     'g_channel': [134.16987991333008, 121.0],
+     'b_channel': [137.05754470825195, 133.0]}
+
+```python
+# Filter the image
+filtered_img = filter_pyfect(img, filter_type='blur', filter_size=10)
+imshow(filtered_img)
+```
+
+![png](/img/output_5_1.png)
+    
+```python
+
+```
 ## Documentation
 
 The official documentation is hosted on Read the Docs: https://picturepyfect.readthedocs.io/en/latest/
