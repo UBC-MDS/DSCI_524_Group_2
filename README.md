@@ -7,7 +7,7 @@ A fun Python utility package to make your pictures perfect! The package enables 
 ## Installation
 
 ```bash
-$ pip install -i https://test.pypi.org/simple/ picturepyfect
+$ pip install -i https://test.pypi.org/simple --extra-index-url https://pypi.org/simple picturepyfect
 ```
 
 ## Features
